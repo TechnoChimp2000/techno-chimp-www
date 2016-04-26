@@ -1,0 +1,20 @@
+<div>
+   <div>
+      <canvas
+         id="feedforwardDemoCanvas"
+         width="{{canvasWidth}}"
+         height="{{canvasHeight}}"
+         style="{{canvasStyle}}"
+         (mousemove)="updateImageContent($event)"
+         (mouseover)="updateMouseOverState(true)"
+         (mouseout)="updateMouseOverState(false)"
+         (mousedown)="updateMouseDownState(true)"
+         (mouseup)="updateMouseDownState(false)"
+         >
+      </canvas>
+   </div>
+   <div>
+      <button (click)="resetCanvas()">Reset</button>
+      <button>Feedforward (not yet)</button>
+   </div>
+</div>

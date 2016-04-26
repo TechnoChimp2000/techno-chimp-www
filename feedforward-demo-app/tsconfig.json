@@ -1,0 +1,21 @@
+{
+    "version": "1.8.10",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "system",
+        "moduleResolution" : "node",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false,
+        "preserveConstEnums": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "outDir": "./js",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "files": [
+        "./ts/feedforwardDemo.component.ts",
+        "./ts/boot.ts"
+    ]
+}
