@@ -11,15 +11,15 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var feedforwardDemo;
+    var canvasApp;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            feedforwardDemo = (function () {
-                function feedforwardDemo() {
+            canvasApp = (function () {
+                function canvasApp() {
                     this.canvasWidth = 400;
                     this.canvasHeight = 400;
                     this.canvasStyle = 'border:1px solid #000000;';
@@ -39,19 +39,19 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                             this.imageContent[i].push(this.imageDefaultColor);
                     }
                 }
-                feedforwardDemo.prototype.ngAfterViewInit = function () {
-                    this.mCanvas = document.getElementById('feedforwardDemoCanvas');
+                canvasApp.prototype.ngAfterViewInit = function () {
+                    this.mCanvas = document.getElementById('canvas-app-id');
                     this.mCanvasContext = this.mCanvas.getContext('2d');
                     this.resetCanvas();
                 };
-                feedforwardDemo.prototype.updateMouseOverState = function (state) {
+                canvasApp.prototype.updateMouseOverState = function (state) {
                     this.mouseOver = state;
                     this.mouseDown = this.mouseOver ? this.mouseDown : false;
                 };
-                feedforwardDemo.prototype.updateMouseDownState = function (state) {
+                canvasApp.prototype.updateMouseDownState = function (state) {
                     this.mouseDown = state;
                 };
-                feedforwardDemo.prototype.updateImageContent = function (event) {
+                canvasApp.prototype.updateImageContent = function (event) {
                     if (!this.mouseDown)
                         return;
                     var cur_x = event.clientX / this.canvasWidth;
@@ -60,10 +60,10 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     cur_y = cur_y > 1.0 ? this.imageHeight : Math.round(cur_y * this.imageHeight) - 1;
                     this.redrawCanvas(false, cur_x, cur_y);
                 };
-                feedforwardDemo.prototype.resetCanvas = function () {
+                canvasApp.prototype.resetCanvas = function () {
                     this.redrawCanvas(true, 0, 0);
                 };
-                feedforwardDemo.prototype.redrawCanvas = function (reset, x_pos, y_pos) {
+                canvasApp.prototype.redrawCanvas = function (reset, x_pos, y_pos) {
                     if (!reset && this.imageContent[x_pos][y_pos] > 0) {
                         this.imageContent[x_pos][y_pos] -= 51;
                     }
@@ -81,16 +81,16 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                         }
                     }
                 };
-                feedforwardDemo = __decorate([
+                canvasApp = __decorate([
                     core_1.Component({
-                        selector: 'feedforward-demo',
-                        templateUrl: 'feedforwardDemo.partial.html'
+                        selector: 'canvas-app',
+                        templateUrl: 'canvasapp.partial.html'
                     }), 
                     __metadata('design:paramtypes', [])
-                ], feedforwardDemo);
-                return feedforwardDemo;
+                ], canvasApp);
+                return canvasApp;
             }());
-            exports_1("feedforwardDemo", feedforwardDemo);
+            exports_1("canvasApp", canvasApp);
         }
     }
 });

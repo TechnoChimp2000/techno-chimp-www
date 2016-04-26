@@ -1,11 +1,11 @@
 import {Component} from 'angular2/core';
 
 @Component({
-    selector: 'feedforward-demo',
-    templateUrl: 'feedforwardDemo.partial.html'
+    selector: 'canvas-app',
+    templateUrl: 'canvasapp.partial.html'
 })
 
-export class feedforwardDemo {
+export class canvasApp {
    // defaults
    canvasWidth: number = 400;
    canvasHeight: number = 400;
@@ -41,7 +41,7 @@ export class feedforwardDemo {
 
    ngAfterViewInit(){
       // after DOM has been loaded
-      this.mCanvas = document.getElementById('feedforwardDemoCanvas');
+      this.mCanvas = document.getElementById('canvas-app-id');
       this.mCanvasContext = this.mCanvas.getContext('2d');
       this.resetCanvas();
    }

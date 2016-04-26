@@ -15,7 +15,7 @@
         "emitDecoratorMetadata": true
     },
     "files": [
-        "./ts/feedforwardDemo.component.ts",
+        "./ts/canvasapp.component.ts",
         "./ts/boot.ts"
     ]
 }
