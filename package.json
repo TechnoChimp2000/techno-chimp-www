@@ -1,8 +1,7 @@
 {
-  "name": "canvas-app",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "technochimp-www",
+  "version": "0.0.1",
+  "description": "technochimp web page",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

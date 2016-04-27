@@ -1,11 +1,11 @@
 import {Component} from 'angular2/core';
 
 @Component({
-    selector: 'canvas-app',
-    templateUrl: 'canvasapp.partial.html'
+    selector: 'canvas-component',
+    templateUrl: './canvas-component/canvas.partial.html'
 })
 
-export class canvasApp {
+export class canvasComponent {
    // defaults
    canvasWidth: number = 400;
    canvasHeight: number = 400;
@@ -22,8 +22,8 @@ export class canvasApp {
    mouseDown: boolean = false;
 
    // pixel (box) size
-   pixelDx: number = this.canvasWidth / this.imageWidth;
-   pixelDy: number = this.canvasHeight / this.imageHeight;
+   dx: number = this.canvasWidth / this.imageWidth;
+   dy: number = this.canvasHeight / this.imageHeight;
 
    // event listener
    mCanvas;
@@ -41,7 +41,7 @@ export class canvasApp {
 
    ngAfterViewInit(){
       // after DOM has been loaded
-      this.mCanvas = document.getElementById('canvas-app-id');
+      this.mCanvas = document.getElementById('canvas-component-id');
       this.mCanvasContext = this.mCanvas.getContext('2d');
       this.resetCanvas();
    }
@@ -89,7 +89,7 @@ export class canvasApp {
                this.imageContent[i][j] + ", " + // G
                this.imageContent[i][j] +        // B
                ")";
-            this.mCanvasContext.fillRect(i*this.pixelDx, j*this.pixelDy, this.pixelDx, this.pixelDy);
+            this.mCanvasContext.fillRect(i*this.dx, j*this.dy, this.dx, this.dy);
          }
       }
    }

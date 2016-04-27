@@ -8,20 +8,23 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.15/angular2-polyfills.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.15/angular2.dev.js"></script>
 
-   <!-- feedforward-demo-app -->
+   <!-- loads web page components -->
    <script>
-   System.config({
-    packages: {
-      js: {
-        format: 'register',
-        defaultExtension: 'js'
-      }
-    }
-  });
-  System.import('js/boot').then(null, console.error.bind(console));
-  </script>
+      System.config({
+         map: {
+           'canvascomponent' : 'canvas-component/js'
+         },
+         packages: {
+            canvascomponent: {  // first word in import path
+              format: 'register',
+              defaultExtension: 'js'
+              }
+           }
+         });
+      System.import('canvascomponent/boot').then(null, console.error.bind(console));
+   </script>
 </head>
 <body>
-   <canvas-app></canvas-app>
+   <canvas-component></canvas-component>
 </body>
 </html>

@@ -11,15 +11,15 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var canvasApp;
+    var canvasComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            canvasApp = (function () {
-                function canvasApp() {
+            canvasComponent = (function () {
+                function canvasComponent() {
                     this.canvasWidth = 400;
                     this.canvasHeight = 400;
                     this.canvasStyle = 'border:1px solid #000000;';
@@ -30,8 +30,8 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     this.imageDefaultColor = 225;
                     this.mouseOver = false;
                     this.mouseDown = false;
-                    this.pixelDx = this.canvasWidth / this.imageWidth;
-                    this.pixelDy = this.canvasHeight / this.imageHeight;
+                    this.dx = this.canvasWidth / this.imageWidth;
+                    this.dy = this.canvasHeight / this.imageHeight;
                     this.imageContent = [];
                     for (var i = 0; i < this.imageWidth; ++i) {
                         this.imageContent.push([]);
@@ -39,19 +39,19 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                             this.imageContent[i].push(this.imageDefaultColor);
                     }
                 }
-                canvasApp.prototype.ngAfterViewInit = function () {
-                    this.mCanvas = document.getElementById('canvas-app-id');
+                canvasComponent.prototype.ngAfterViewInit = function () {
+                    this.mCanvas = document.getElementById('canvas-component-id');
                     this.mCanvasContext = this.mCanvas.getContext('2d');
                     this.resetCanvas();
                 };
-                canvasApp.prototype.updateMouseOverState = function (state) {
+                canvasComponent.prototype.updateMouseOverState = function (state) {
                     this.mouseOver = state;
                     this.mouseDown = this.mouseOver ? this.mouseDown : false;
                 };
-                canvasApp.prototype.updateMouseDownState = function (state) {
+                canvasComponent.prototype.updateMouseDownState = function (state) {
                     this.mouseDown = state;
                 };
-                canvasApp.prototype.updateImageContent = function (event) {
+                canvasComponent.prototype.updateImageContent = function (event) {
                     if (!this.mouseDown)
                         return;
                     var cur_x = event.clientX / this.canvasWidth;
@@ -60,10 +60,10 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     cur_y = cur_y > 1.0 ? this.imageHeight : Math.round(cur_y * this.imageHeight) - 1;
                     this.redrawCanvas(false, cur_x, cur_y);
                 };
-                canvasApp.prototype.resetCanvas = function () {
+                canvasComponent.prototype.resetCanvas = function () {
                     this.redrawCanvas(true, 0, 0);
                 };
-                canvasApp.prototype.redrawCanvas = function (reset, x_pos, y_pos) {
+                canvasComponent.prototype.redrawCanvas = function (reset, x_pos, y_pos) {
                     if (!reset && this.imageContent[x_pos][y_pos] > 0) {
                         this.imageContent[x_pos][y_pos] -= 51;
                     }
@@ -77,20 +77,20 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                                 this.imageContent[i][j] + ", " +
                                 this.imageContent[i][j] +
                                 ")";
-                            this.mCanvasContext.fillRect(i * this.pixelDx, j * this.pixelDy, this.pixelDx, this.pixelDy);
+                            this.mCanvasContext.fillRect(i * this.dx, j * this.dy, this.dx, this.dy);
                         }
                     }
                 };
-                canvasApp = __decorate([
+                canvasComponent = __decorate([
                     core_1.Component({
-                        selector: 'canvas-app',
-                        templateUrl: 'canvasapp.partial.html'
+                        selector: 'canvas-component',
+                        templateUrl: './canvas-component/canvas.partial.html'
                     }), 
                     __metadata('design:paramtypes', [])
-                ], canvasApp);
-                return canvasApp;
+                ], canvasComponent);
+                return canvasComponent;
             }());
-            exports_1("canvasApp", canvasApp);
+            exports_1("canvasComponent", canvasComponent);
         }
     }
 });

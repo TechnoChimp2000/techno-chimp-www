@@ -10,12 +10,12 @@
         "noLib": false,
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true,
-        "outDir": "./js",
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+        "emitDecoratorMetadata": true,
+        "outDir" : "./js"
     },
     "files": [
-        "./ts/canvasapp.component.ts",
-        "./ts/boot.ts"
+        "ts/canvas.component.ts",
+        "ts/boot.ts"
     ]
 }
