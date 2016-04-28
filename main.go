@@ -8,10 +8,10 @@ import (
 )
 
 func homeHandler(res http.ResponseWriter, req *http.Request) {
-	if req.URL.Path != "/"{
+	if req.URL.Path != "/" {
 		io.WriteString(res, "404, not found")
 	} else {
-		// assume index.html exists
+		// assumes index.html exists
 		indexPage, _ := ioutil.ReadFile("index.html")
 		io.WriteString(res, string(indexPage))
 	}
