@@ -1,4 +1,5 @@
-TechnoChimp web page
-====================
+###TechnoChimp web page
 
-In development...
+Components and apps which appear on TechnoChimp's web page.
+
+Not much yet.
