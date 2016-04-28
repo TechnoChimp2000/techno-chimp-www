@@ -31,11 +31,12 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.imageHeight = 28;
                     this.imageMinColor = 0;
                     this.imageMaxColor = 255;
-                    this.imageDefaultColor = 225;
+                    this.imageDefaultColor = 255;
                     this.mouseOver = false;
                     this.mouseDown = false;
                     this.dx = this.canvasWidth / this.imageWidth;
                     this.dy = this.canvasHeight / this.imageHeight;
+                    this.showResult = false;
                     this.http = http;
                     this.imageContent = [];
                     for (var i = 0; i < this.imageWidth; ++i) {
@@ -66,6 +67,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.redrawCanvas(false, cur_x, cur_y);
                 };
                 canvasComponent.prototype.resetCanvas = function () {
+                    this.showResult = false;
                     this.redrawCanvas(true);
                 };
                 canvasComponent.prototype.redrawCanvas = function (reset, x_pos, y_pos) {
@@ -89,12 +91,16 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     }
                 };
                 canvasComponent.prototype.feedforward = function () {
+                    var _this = this;
                     var data = [];
                     for (var i = 0; i < this.imageWidth; ++i)
                         for (var j = 0; j < this.imageHeight; ++j)
                             data.push(this.imageContent[j][i]);
                     this.http.post("/canvas-component/feedforward/", JSON.stringify(data))
-                        .map(function (res) { return console.log(res); })
+                        .map(function (res) {
+                        _this.result = res.json();
+                        _this.showResult = true;
+                    })
                         .subscribe(function (data) { return console.log("success"); });
                 };
                 canvasComponent = __decorate([

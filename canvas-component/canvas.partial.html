@@ -15,6 +15,9 @@
    </div>
    <div>
       <button (click)="resetCanvas()">Reset</button>
-      <button (click)="feedforward()">Feedforward (not yet)</button>
+      <button (click)="feedforward()">Feedforward</button>
+      <p *ngIf="showResult">
+         Result: {{result}}
+      </p>
    </div>
 </div>

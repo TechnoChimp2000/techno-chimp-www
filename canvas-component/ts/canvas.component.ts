@@ -14,12 +14,12 @@ export class canvasComponent {
    canvasWidth: number = 400;
    canvasHeight: number = 400;
    canvasStyle: string = 'border:1px solid #000000;';
-   
+
    imageWidth: number = 28;
    imageHeight: number = 28;
    imageMinColor: number = 0;
    imageMaxColor: number = 255;
-   imageDefaultColor: number = 225;
+   imageDefaultColor: number = 255;
    // color value of each box (columns x rows)
    imageContent: number[][];
 
@@ -36,6 +36,9 @@ export class canvasComponent {
 
    // connects to backend
    http: Http;
+
+   showResult: boolean = false;
+   result: number;
 
    constructor(http: Http){
       this.http = http;
@@ -78,6 +81,7 @@ export class canvasComponent {
    }
 
    resetCanvas(){
+      this.showResult = false;
       this.redrawCanvas(true);
    }
 
@@ -113,7 +117,10 @@ export class canvasComponent {
                data.push(this.imageContent[j][i]);
 
       this.http.post("/canvas-component/feedforward/", JSON.stringify(data))
-         .map((res: Response) => console.log(res))
+         .map((res: Response) => {
+            this.result = res.json();
+            this.showResult = true;
+         })
          .subscribe(
             data => console.log("success")
          );

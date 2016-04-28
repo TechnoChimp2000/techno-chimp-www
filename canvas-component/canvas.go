@@ -4,10 +4,12 @@ import (
    "fmt"
    "io"
    "io/ioutil"
+   "strconv"
    "net/http"
    "encoding/json"
    "github.com/Go-Feedforward-Neural-Network/network"
 )
+
 
 func CanvasHandler(res http.ResponseWriter, req *http.Request) {
    if(req.URL.Path == "/canvas-component/feedforward/") {
@@ -15,7 +17,7 @@ func CanvasHandler(res http.ResponseWriter, req *http.Request) {
       inp_floats := make([]float32, 784)
       json.Unmarshal(inp_bytes, &inp_floats)
       out:=feedforwardCanvas(inp_floats)
-      io.WriteString(res, string(out))
+      io.WriteString(res, strconv.Itoa(out))
       return
    }
 
@@ -23,7 +25,7 @@ func CanvasHandler(res http.ResponseWriter, req *http.Request) {
 }
 
 func feedforwardCanvas(input []float32) int {
-   // create the network
+   // json_file path relative to server.go
    json_file := "./canvas-component/files/trained_network.json"
    nn := network.LoadNetworkFromFile( json_file )
 
