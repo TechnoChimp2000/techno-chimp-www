@@ -12,17 +12,17 @@
    <!-- loads web page components -->
    <script>
       System.config({
-         map: {
-           'canvascomponent' : 'canvas-component/js'
+         map:{
+            'main' : 'main-component'
          },
          packages: {
-            canvascomponent: {  // first word in import path
+            main: {  // first word in import path
               format: 'register',
-              defaultExtension: 'js'
+              defaultExtension: 'js',
               }
            }
-         });
-      System.import('canvascomponent/boot').then(null, console.error.bind(console));
+        });
+     System.import('main/boot').then(null, console.error.bind(console));
    </script>
 </head>
 <body>

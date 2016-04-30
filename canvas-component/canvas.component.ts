@@ -3,7 +3,8 @@ import {Http, Response, HTTP_PROVIDERS} from 'angular2/http';
 
 @Component({
     selector: 'canvas-component',
-    templateUrl: './canvas-component/canvas.partial.html',
+    // templateUrl path relative to main.go
+    templateUrl: 'canvas-component/canvas.partial.html',
     providers: [HTTP_PROVIDERS]
 })
 
@@ -95,8 +96,8 @@ export class canvasComponent {
       }
 
       this.mCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-      for(var i: number = 0; i < this.imageWidth; ++i){
-         for(var j: number = 0; j < this.imageHeight; ++j){
+      for(var i: number = 0; i < this.imageWidth; ++i) {
+         for(var j: number = 0; j < this.imageHeight; ++j) {
             if(reset)
                this.imageContent[i][j] = this.imageDefaultColor;
             this.mCanvasContext.fillStyle = "rgb(" +

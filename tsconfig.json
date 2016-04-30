@@ -12,10 +12,10 @@
         "suppressImplicitAnyIndexErrors": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "outDir" : "./js"
+        "outDir" : "./"
     },
     "files": [
-        "ts/canvas.component.ts",
-        "ts/boot.ts"
+        "./main-component/boot.ts",
+        "./canvas-component/canvas.component.ts"
     ]
 }
