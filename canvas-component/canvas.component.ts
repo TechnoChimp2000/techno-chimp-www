@@ -45,9 +45,9 @@ export class canvasComponent {
       this.http = http;
       this.imageContent = [];
       // initialize default color
-      for(var i: number = 0; i < this.imageWidth; ++i){
+      for(var i: number = 0; i < this.imageHeight; ++i){
          this.imageContent.push([]);
-         for(var j: number = 0; j< this.imageHeight; ++j)
+         for(var j: number = 0; j < this.imageWidth; ++j)
             this.imageContent[i].push(this.imageDefaultColor);
       }
    }
@@ -111,11 +111,11 @@ export class canvasComponent {
    }
 
    feedforward(){
-      // loop through rows x columns and fill in data
+      // loop through rows x columns and fill in the data
       var data: number[] = [];
       for(var i: number = 0; i < this.imageWidth; ++i)
          for(var j: number = 0; j < this.imageHeight; ++j)
-               data.push(this.imageContent[j][i]);
+               data.push(255 - this.imageContent[j][i]); // MNIST uses number 0 for white
 
       this.http.post("/canvas-component/feedforward/", JSON.stringify(data))
          .map((res: Response) => {

@@ -39,9 +39,9 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.showResult = false;
                     this.http = http;
                     this.imageContent = [];
-                    for (var i = 0; i < this.imageWidth; ++i) {
+                    for (var i = 0; i < this.imageHeight; ++i) {
                         this.imageContent.push([]);
-                        for (var j = 0; j < this.imageHeight; ++j)
+                        for (var j = 0; j < this.imageWidth; ++j)
                             this.imageContent[i].push(this.imageDefaultColor);
                     }
                 }
@@ -95,7 +95,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     var data = [];
                     for (var i = 0; i < this.imageWidth; ++i)
                         for (var j = 0; j < this.imageHeight; ++j)
-                            data.push(this.imageContent[j][i]);
+                            data.push(255 - this.imageContent[j][i]);
                     this.http.post("/canvas-component/feedforward/", JSON.stringify(data))
                         .map(function (res) {
                         _this.result = res.json();
