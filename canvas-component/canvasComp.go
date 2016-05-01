@@ -10,6 +10,14 @@ import (
    "github.com/Go-Feedforward-Neural-Network/network"
 )
 
+type canvasNN struct {
+   loaded bool
+   nn *network.NeuralNetwork
+}
+
+// load it only once
+var canvasNet canvasNN = canvasNN{loaded:false}
+
 func Handler(res http.ResponseWriter, req *http.Request) {
    if req.URL.Path == "/canvas-component/feedforward/" {
       inp_bytes,err:=ioutil.ReadAll(req.Body)
@@ -33,11 +41,14 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 }
 
 func feedforwardCanvas(input []float32) int {
-   // json_file path relative to main.go
-   json_file := "canvas-component/trained_network.json"
-   nn := network.LoadNetworkFromFile( json_file )
-
-   predictionVector := nn.Calculate(input)
+   // load only once
+   if !canvasNet.loaded{
+      // json_file path relative to main.go
+      json_file := "canvas-component/trained_network.json"
+      canvasNet.nn = network.LoadNetworkFromFile( json_file )
+      canvasNet.loaded = true
+   }
+   predictionVector := canvasNet.nn.Calculate(input)
    fmt.Printf("Prediction Vector:%v\n", predictionVector )
 
    predictionVectorNormalized := network.Predict(predictionVector)
