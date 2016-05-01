@@ -51,7 +51,7 @@ func feedforwardCanvas(input []float32) int {
 func getOne(input []float32) (int, string) {
    for i,j := range input {
       if j == 1 {
-         return i+1, ""
+         return (i+1)%10, ""
       }
    }
    return -1, "Array doesn't contain num 1"

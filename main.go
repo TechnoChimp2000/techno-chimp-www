@@ -3,7 +3,7 @@ package main
 import (
    "net/http"
    "github.com/techno-chimp-www/main-component"
-	"github.com/techno-chimp-www/canvas-component"
+   "github.com/techno-chimp-www/canvas-component"
 )
 
 func main() {
