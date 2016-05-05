@@ -5,18 +5,27 @@ import (
    "io"
    "io/ioutil"
    "strconv"
+   "sort"
    "net/http"
    "encoding/json"
    "github.com/Go-Feedforward-Neural-Network/network"
 )
 
+
+// load only once
 type canvasNN struct {
    loaded bool
    nn *network.NeuralNetwork
 }
-
-// load it only once
 var canvasNet canvasNN = canvasNN{loaded:false}
+
+// data from ajax
+type canvasData struct {
+   Width uint16 `json:"width"`
+   Height uint16 `json:"height"`
+   Data map[string]uint8 `json:"data"`
+   Keys []int `json:"-"`
+}
 
 func Handler(res http.ResponseWriter, req *http.Request) {
    if req.URL.Path == "/canvas-component/feedforward/" {
@@ -26,15 +35,24 @@ func Handler(res http.ResponseWriter, req *http.Request) {
          io.WriteString(res, "Invalid request")
          return
       }
-      inp_floats := make([]float32, 784)
-      err = json.Unmarshal(inp_bytes, &inp_floats)
+
+      var inp_data canvasData
+      err = json.Unmarshal(inp_bytes, &inp_data)
+
       if err!=nil{
-         fmt.Printf("Error while trying to unpack json: %v \n", err)
+         fmt.Printf("Error when trying to unpack json: %v\n", err)
          io.WriteString(res, "Invalid request")
          return
       }
+      for key,_:=range inp_data.Data {
+         index, _ := strconv.Atoi(key)
+         inp_data.Keys = append(inp_data.Keys, index)
+      }
+      sort.Ints(inp_data.Keys)
+
+      /*
       feedforward_result:=feedforwardCanvas(inp_floats)
-      io.WriteString(res, strconv.Itoa(feedforward_result))
+      */
       return
    }
    http.ServeFile(res, req, req.URL.Path[1:])

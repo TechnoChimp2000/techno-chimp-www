@@ -8,8 +8,8 @@
          (mousemove)="updateImageContent($event)"
          (mouseover)="updateMouseOverState(true)"
          (mouseout)="updateMouseOverState(false)"
-         (mousedown)="updateMouseDownState(true)"
-         (mouseup)="updateMouseDownState(false)"
+         (mousedown)="updateMouseDownState($event, true)"
+         (mouseup)="updateMouseDownState($event, false)"
          >
       </canvas>
    </div>
