@@ -1,13 +1,16 @@
 package main
 
 import (
-   "net/http"
-   "github.com/techno-chimp-www/main-component"
-   "github.com/techno-chimp-www/canvas-component"
+	"io"
+	"net/http"
+	"fmt"
 )
 
+func hello(w http.ResponseWriter, r *http.Request) {
+	io.WriteString(w, "Hello world!  - Igor's test go server")
+}
+
 func main() {
-	http.HandleFunc("/", mainComp.Handler)
-	http.HandleFunc("/canvas-component/", canvasComp.Handler)
-	http.ListenAndServe(":8000", nil)
+	http.HandleFunc("/", hello)
+	fmt.Println(http.ListenAndServe(":8000", nil))
 }
