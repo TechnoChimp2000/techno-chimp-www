@@ -1,16 +1,14 @@
 package main
 
 import (
-	"io"
 	"net/http"
 	"fmt"
+	"github.com/techno-chimp-www/main-component"
+	"github.com/techno-chimp-www/githook"
 )
 
-func hello(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "Hello world!  - Igor's test go server")
-}
-
 func main() {
-	http.HandleFunc("/", hello)
+	http.HandleFunc("/", mainComp.Handler)
+	http.HandleFunc("/githook/", gitHook.Handler)
 	fmt.Println(http.ListenAndServe(":8000", nil))
 }
