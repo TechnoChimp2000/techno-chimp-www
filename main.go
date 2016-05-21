@@ -1,10 +1,10 @@
 package main
 
 import (
-	"net/http"
-	"github.com/techno-chimp-www/main-component"
 	"github.com/techno-chimp-www/githook"
 	"github.com/techno-chimp-www/log" // wrapper around the golang's native log
+	"github.com/techno-chimp-www/main-component"
+	"net/http"
 	"os"
 )
 
@@ -18,5 +18,3 @@ func main() {
 	http.ListenAndServe(":8000", log.ServerLog(http.DefaultServeMux))
 
 }
-
-
