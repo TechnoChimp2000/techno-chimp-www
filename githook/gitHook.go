@@ -21,7 +21,9 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 
 		log.Info.Println("githook requested");
 
-		cmd := exec.Command("git", "status") // here we need to be specific where to pull from -- full path to destination is appropriate
+		cmd := exec.Command("git", "-C", "/home/www-data/go/src/github.com/techno-chimp-www/", "pull")
+		// here we need to be specific where to pull from -- full path to destination is appropriate
+
 		printCommand(cmd)
 		output, err := cmd.CombinedOutput()
 		printError(err)
