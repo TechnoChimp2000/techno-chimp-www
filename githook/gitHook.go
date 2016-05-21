@@ -2,10 +2,10 @@ package gitHook
 
 import (
    	"net/http"
-   	"fmt"
 	"os/exec"
 	"strings"
 	"os"
+	"github.com/techno-chimp-www/log"
 )
 
 // The handler is called by the 3rd party, github speficifally
@@ -16,9 +16,12 @@ import (
 
 func Handler(res http.ResponseWriter, req *http.Request) { 
 	if req.URL.Path == "/githook/" {
-		fmt.Println("githook requested");
 
-		cmd := exec.Command("git", "status")
+		log.Init(os.Stdout, os.Stdout, os.Stderr, "githook.log")
+
+		log.Info.Println("githook requested");
+
+		cmd := exec.Command("git", "status") // here we need to be specific where to pull from -- full path to destination is appropriate
 		printCommand(cmd)
 		output, err := cmd.CombinedOutput()
 		printError(err)
@@ -29,17 +32,18 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 } 
 
 func printCommand(cmd *exec.Cmd) {
-	fmt.Printf("==> Executing: %s\n", strings.Join(cmd.Args, " "))
+
+	log.Info.Printf("Executing: %s\n", strings.Join(cmd.Args, " "))
 }
 
 func printOutput(outs []byte) {
  	if len(outs) > 0 {
-    		fmt.Printf("==> Output: %s\n", string(outs))
+    		log.Info.Printf("Output: %s\n", string(outs))
   	}
 }
 
 func printError(err error) {
 	if err != nil {
-    		os.Stderr.WriteString(fmt.Sprintf("==> Error: %s\n", err.Error()))
+    		log.Error.Printf("Error: %s\n", err.Error())
   	}
 }	
