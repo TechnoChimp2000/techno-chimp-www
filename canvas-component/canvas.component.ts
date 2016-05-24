@@ -15,8 +15,8 @@ export class canvasComponent {
    // defaults
    canvasWidth: number = 300;
    canvasHeight: number = 300;
-   canvasStyle: string = 'border:1px solid #000000; float: left;';
-   secondCanvasStyle: string = 'border:1px solid #000000; float: left;';
+   canvasStyle: string = 'border:1px solid #000000;';
+   secondCanvasStyle: string = 'border:1px solid #000000;';
 
    mouseOver: boolean = false;
    mouseDown: boolean = false;
@@ -53,9 +53,6 @@ export class canvasComponent {
       this.mSecondCanvas = document.getElementById(this.secondCanvasId);
       this.mSecondCanvasContext = this.mSecondCanvas.getContext('2d');
       this.mSecondCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-
-      var pic: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.20462185, 0.5, 0.5, 0.122709095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.4187675, 1, 1, 0.15318125, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.09539819, 0.7103641, 0.5766107, 0.0037415028, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.7244898, 0.78571427, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0.78571427, 0.7244898, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.21482593, 0.78571427, 0.78571427, 0.2944578, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.2310524, 1, 1, 0.23217285, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00048017502, 0.37056822, 0.36998802, 0.00042015314, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      this.updateSecondCanvas(pic);
    }
 
    updateMouseOverState(state: boolean){
@@ -80,30 +77,29 @@ export class canvasComponent {
       var posx = event.clientX;
       var posy = event.clientY;
 
-      this.mCanvasContext.beginPath();
-      for(var i: number=0; i<5; ++i) {
-         var alpha:number = (5.0-i)/5.0;
-         this.mCanvasContext.fillStyle = 'rgba(0, 0, 0, '+alpha+')';
-         var radius:number = 6.0/100.0*this.canvasWidth;
-         var left = posx - radius;
-         var right = posx + radius;
-         var up = posy - radius;
-         var down = posy + radius;
-         if(left < this.min_x)
-            this.min_x = left < 0 ? 0 : left;
-         if(right > this.max_x)
-            this.max_x = right > this.canvasWidth ? this.canvasWidth : right;
-         if(up < this.min_y)
-            this.min_y = up < 0 ? 0 : up;
-         if(down > this.max_y)
-            this.max_y = down > this.canvasHeight ? this.canvasHeight : down;
 
-         this.mCanvasContext.arc(posx, posy, radius,0, Math.PI*2);
-         this.mCanvasContext.fill();
-      }
+      this.mCanvasContext.fillStyle = "rgb(0,0,0)";
+      var radius:number = 5.0/100.0*this.canvasWidth;
+      var left = posx - radius;
+      var right = posx + radius;
+      var up = posy - radius;
+      var down = posy + radius;
+      if(left < this.min_x)
+         this.min_x = left < 0 ? 0 : left;
+      if(right > this.max_x)
+         this.max_x = right > this.canvasWidth ? this.canvasWidth : right;
+      if(up < this.min_y)
+         this.min_y = up < 0 ? 0 : up;
+      if(down > this.max_y)
+         this.max_y = down > this.canvasHeight ? this.canvasHeight : down;
+
+      this.mCanvasContext.beginPath();
+      this.mCanvasContext.arc(posx, posy, radius,0, Math.PI*2);
+      this.mCanvasContext.fill();
    }
 
    updateSecondCanvas(pic28x28: number[]) {
+      this.mSecondCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
       var dx: number = this.canvasWidth/28.0;
       var dy: number = this.canvasHeight/28.0;
       for(var i: number = 0; i<28; i++){
@@ -135,8 +131,10 @@ export class canvasComponent {
       });
       this.http.post("/canvas-component/feedforward/", json_data)
          .map((res: Response) => {
-            this.result = res.json();
+            var result = res.json();
+            this.result = result.Result;
             this.showResult = true;
+            this.updateSecondCanvas(result.Input);
          })
          .subscribe(
             data => console.log("success")

@@ -31,6 +31,12 @@ type canvasData struct {
    Keys []int `json:"-"` // calculated
 }
 
+// data back to ajax
+type responseData struct {
+   Input []float32
+   Result int
+}
+
 func Handler(res http.ResponseWriter, req *http.Request) {
    if req.URL.Path == "/canvas-component/feedforward/" {
       // read input data
@@ -56,17 +62,12 @@ func Handler(res http.ResponseWriter, req *http.Request) {
       sort.Ints(inp_data.Keys)
 
       inp_floats:=transformCanvasData(&inp_data)
-
-      fmt.Printf("[")//debug
-      for i:=0; i<len(inp_floats); i++{//debug
-         fmt.Printf("%v, ", inp_floats[i])//debug
-      }//debug
-      fmt.Printf("]\n")//debug
-      //fmt.Printf("%v\n",inp_floats) //debug
-
       feedforward_result:=feedforwardCanvas(inp_floats)
-      io.WriteString(res, strconv.Itoa(feedforward_result))
 
+      // also return input which went into nn and result
+      rd:=&responseData{inp_floats, feedforward_result}
+      jsoned,_ := json.Marshal(rd)
+      io.WriteString(res, string(jsoned))
       return
    }
    http.ServeFile(res, req, req.URL.Path[1:])
@@ -105,7 +106,7 @@ func getOne(input []float32) (int, string) {
 func transformCanvasData(cd *canvasData) []float32 {
    retval:=make([]float32, 784)
    out:=make([]uint8, len(cd.Data)/4)
-   // take only alpha values (by canvas construction)
+   // use alpha value (by construction)
    for i:=3; i<len(cd.Data); i+=4 {
       val:=cd.Data[strconv.Itoa(cd.Keys[i])]
       out[(i+1)/4 - 1] = 255 - val

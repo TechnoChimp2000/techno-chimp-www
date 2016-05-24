@@ -27,8 +27,8 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.secondCanvasId = "secondCanvas";
                     this.canvasWidth = 300;
                     this.canvasHeight = 300;
-                    this.canvasStyle = 'border:1px solid #000000; float: left;';
-                    this.secondCanvasStyle = 'border:1px solid #000000; float: left;';
+                    this.canvasStyle = 'border:1px solid #000000;';
+                    this.secondCanvasStyle = 'border:1px solid #000000;';
                     this.mouseOver = false;
                     this.mouseDown = false;
                     this.min_x = this.canvasWidth;
@@ -45,8 +45,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.mSecondCanvas = document.getElementById(this.secondCanvasId);
                     this.mSecondCanvasContext = this.mSecondCanvas.getContext('2d');
                     this.mSecondCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-                    var pic = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.20462185, 0.5, 0.5, 0.122709095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.4187675, 1, 1, 0.15318125, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.09539819, 0.7103641, 0.5766107, 0.0037415028, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.7244898, 0.78571427, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0.78571427, 0.7244898, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.21482593, 0.78571427, 0.78571427, 0.2944578, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.2310524, 1, 1, 0.23217285, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00048017502, 0.37056822, 0.36998802, 0.00042015314, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-                    this.updateSecondCanvas(pic);
                 };
                 canvasComponent.prototype.updateMouseOverState = function (state) {
                     this.mouseOver = state;
@@ -65,28 +63,26 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                         return;
                     var posx = event.clientX;
                     var posy = event.clientY;
+                    this.mCanvasContext.fillStyle = "rgb(0,0,0)";
+                    var radius = 5.0 / 100.0 * this.canvasWidth;
+                    var left = posx - radius;
+                    var right = posx + radius;
+                    var up = posy - radius;
+                    var down = posy + radius;
+                    if (left < this.min_x)
+                        this.min_x = left < 0 ? 0 : left;
+                    if (right > this.max_x)
+                        this.max_x = right > this.canvasWidth ? this.canvasWidth : right;
+                    if (up < this.min_y)
+                        this.min_y = up < 0 ? 0 : up;
+                    if (down > this.max_y)
+                        this.max_y = down > this.canvasHeight ? this.canvasHeight : down;
                     this.mCanvasContext.beginPath();
-                    for (var i = 0; i < 5; ++i) {
-                        var alpha = (5.0 - i) / 5.0;
-                        this.mCanvasContext.fillStyle = 'rgba(0, 0, 0, ' + alpha + ')';
-                        var radius = 6.0 / 100.0 * this.canvasWidth;
-                        var left = posx - radius;
-                        var right = posx + radius;
-                        var up = posy - radius;
-                        var down = posy + radius;
-                        if (left < this.min_x)
-                            this.min_x = left < 0 ? 0 : left;
-                        if (right > this.max_x)
-                            this.max_x = right > this.canvasWidth ? this.canvasWidth : right;
-                        if (up < this.min_y)
-                            this.min_y = up < 0 ? 0 : up;
-                        if (down > this.max_y)
-                            this.max_y = down > this.canvasHeight ? this.canvasHeight : down;
-                        this.mCanvasContext.arc(posx, posy, radius, 0, Math.PI * 2);
-                        this.mCanvasContext.fill();
-                    }
+                    this.mCanvasContext.arc(posx, posy, radius, 0, Math.PI * 2);
+                    this.mCanvasContext.fill();
                 };
                 canvasComponent.prototype.updateSecondCanvas = function (pic28x28) {
+                    this.mSecondCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
                     var dx = this.canvasWidth / 28.0;
                     var dy = this.canvasHeight / 28.0;
                     for (var i = 0; i < 28; i++) {
@@ -117,8 +113,10 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     });
                     this.http.post("/canvas-component/feedforward/", json_data)
                         .map(function (res) {
-                        _this.result = res.json();
+                        var result = res.json();
+                        _this.result = result.Result;
                         _this.showResult = true;
+                        _this.updateSecondCanvas(result.Input);
                     })
                         .subscribe(function (data) { return console.log("success"); });
                 };
