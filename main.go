@@ -22,7 +22,7 @@ func main() {
 		wdBefore, _ := syscall.Getwd()
 		fmt.Println("initial working directory: ", wdBefore)
 
-		// change working directory
+		// change working directory if you want to
 		syscall.Chdir("/Users/ivalantic/work/go/src/github.com/techno-chimp-www")
 
 		wdAfter, _ := syscall.Getwd()
