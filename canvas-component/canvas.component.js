@@ -28,7 +28,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.canvasWidth = 300;
                     this.canvasHeight = 300;
                     this.canvasStyle = 'border:1px solid #000000;';
-                    this.secondCanvasStyle = 'border:1px solid #000000;';
+                    this.divStyle = 'float: left; margin-right: 20px;';
                     this.mouseOver = false;
                     this.mouseDown = false;
                     this.min_x = this.canvasWidth;
@@ -42,9 +42,13 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.mCanvas = document.getElementById(this.canvasId);
                     this.mCanvasContext = this.mCanvas.getContext('2d');
                     this.mCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+                    this.mCanvasContext.fillStyle = 'rgb(255,255,255)';
+                    this.mCanvasContext.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
                     this.mSecondCanvas = document.getElementById(this.secondCanvasId);
                     this.mSecondCanvasContext = this.mSecondCanvas.getContext('2d');
                     this.mSecondCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+                    this.mSecondCanvasContext.fillStyle = 'rgb(255,255,255)';
+                    this.mSecondCanvasContext.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
                 };
                 canvasComponent.prototype.updateMouseOverState = function (state) {
                     this.mouseOver = state;
@@ -83,6 +87,8 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                 };
                 canvasComponent.prototype.updateSecondCanvas = function (pic28x28) {
                     this.mSecondCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+                    this.mSecondCanvasContext.fillStyle = 'rgb(255,255,255)';
+                    this.mSecondCanvasContext.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
                     var dx = this.canvasWidth / 28.0;
                     var dy = this.canvasHeight / 28.0;
                     for (var i = 0; i < 28; i++) {
@@ -100,6 +106,8 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.min_y = this.canvasHeight;
                     this.max_y = 0;
                     this.mCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+                    this.mCanvasContext.fillStyle = 'rgb(255,255,255)';
+                    this.mCanvasContext.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
                 };
                 canvasComponent.prototype.feedforward = function () {
                     var _this = this;
@@ -113,10 +121,10 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     });
                     this.http.post("/canvas-component/feedforward/", json_data)
                         .map(function (res) {
-                        var result = res.json();
-                        _this.result = result.Result;
+                        var _res = res.json();
+                        _this.result = _res.Result;
                         _this.showResult = true;
-                        _this.updateSecondCanvas(result.Input);
+                        _this.updateSecondCanvas(_res.Input);
                     })
                         .subscribe(function (data) { return console.log("success"); });
                 };

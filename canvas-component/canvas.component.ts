@@ -16,12 +16,12 @@ export class canvasComponent {
    canvasWidth: number = 300;
    canvasHeight: number = 300;
    canvasStyle: string = 'border:1px solid #000000;';
-   secondCanvasStyle: string = 'border:1px solid #000000;';
+   divStyle: string = 'float: left; margin-right: 20px;';
 
    mouseOver: boolean = false;
    mouseDown: boolean = false;
 
-   // event listener
+   // event listeners
    mCanvas;
    mCanvasContext;
 
@@ -49,10 +49,14 @@ export class canvasComponent {
       this.mCanvas = document.getElementById(this.canvasId);
       this.mCanvasContext = this.mCanvas.getContext('2d');
       this.mCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+      this.mCanvasContext.fillStyle='rgb(255,255,255)';
+      this.mCanvasContext.fillRect(0,0,this.canvasWidth, this.canvasHeight);
 
       this.mSecondCanvas = document.getElementById(this.secondCanvasId);
       this.mSecondCanvasContext = this.mSecondCanvas.getContext('2d');
       this.mSecondCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+      this.mSecondCanvasContext.fillStyle='rgb(255,255,255)';
+      this.mSecondCanvasContext.fillRect(0,0,this.canvasWidth, this.canvasHeight);
    }
 
    updateMouseOverState(state: boolean){
@@ -77,7 +81,6 @@ export class canvasComponent {
       var posx = event.clientX;
       var posy = event.clientY;
 
-
       this.mCanvasContext.fillStyle = "rgb(0,0,0)";
       var radius:number = 5.0/100.0*this.canvasWidth;
       var left = posx - radius;
@@ -100,6 +103,8 @@ export class canvasComponent {
 
    updateSecondCanvas(pic28x28: number[]) {
       this.mSecondCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+      this.mSecondCanvasContext.fillStyle='rgb(255,255,255)';
+      this.mSecondCanvasContext.fillRect(0,0,this.canvasWidth, this.canvasHeight);
       var dx: number = this.canvasWidth/28.0;
       var dy: number = this.canvasHeight/28.0;
       for(var i: number = 0; i<28; i++){
@@ -118,6 +123,8 @@ export class canvasComponent {
       this.min_y = this.canvasHeight;
       this.max_y = 0;
       this.mCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+      this.mCanvasContext.fillStyle='rgb(255,255,255)';
+      this.mCanvasContext.fillRect(0,0,this.canvasWidth, this.canvasHeight);
    }
 
    feedforward(){
@@ -131,10 +138,10 @@ export class canvasComponent {
       });
       this.http.post("/canvas-component/feedforward/", json_data)
          .map((res: Response) => {
-            var result = res.json();
-            this.result = result.Result;
+            var _res = res.json();
+            this.result = _res.Result;
             this.showResult = true;
-            this.updateSecondCanvas(result.Input);
+            this.updateSecondCanvas(_res.Input);
          })
          .subscribe(
             data => console.log("success")

@@ -54,7 +54,7 @@ func Handler(res http.ResponseWriter, req *http.Request) {
          io.WriteString(res, "Invalid request")
          return
       }
-      // sort input pixels in ascending order
+      // sort input pixels in ascending order (JSON.stringify() mixed them)
       for key,_:=range inp_data.Data {
          index, _ := strconv.Atoi(key)
          inp_data.Keys = append(inp_data.Keys, index)
@@ -106,10 +106,9 @@ func getOne(input []float32) (int, string) {
 func transformCanvasData(cd *canvasData) []float32 {
    retval:=make([]float32, 784)
    out:=make([]uint8, len(cd.Data)/4)
-   // use alpha value (by construction)
-   for i:=3; i<len(cd.Data); i+=4 {
-      val:=cd.Data[strconv.Itoa(cd.Keys[i])]
-      out[(i+1)/4 - 1] = 255 - val
+   // take first value (canvas getImageData returns rgba with opposite colors wrt MNIST)
+   for i:=0; i<len(cd.Data); i+=4 {
+      out[i/4] = 255 - cd.Data[strconv.Itoa(cd.Keys[i])]
    }
 
    width_remainder := cd.Width%contentSize
@@ -152,13 +151,13 @@ func transformCanvasData(cd *canvasData) []float32 {
       var right uint16 = additional_width - left;
       for i:=uint16(0); i < cd.Height; i++ {
          for j:=uint16(0); j<left; j++ {
-            enlarged_cols[i*(cd.Width + left + right)+j] = 255
+            enlarged_cols[i*(cd.Width + left + right)+j] = 0
          }
          for j:=uint16(0); j<cd.Width; j++{
             enlarged_cols[i*(cd.Width+left+right) + left +j] = out[i*cd.Width+j]
          }
          for j:=uint16(0); j<right; j++ {
-            enlarged_cols[i*(cd.Width+left+right) + left + cd.Width +j] = 255
+            enlarged_cols[i*(cd.Width+left+right) + left + cd.Width +j] = 0
          }
       }
    }
@@ -171,7 +170,7 @@ func transformCanvasData(cd *canvasData) []float32 {
       row:=uint16(cd.Width + additional_width)
       for i:=uint16(0); i<top; i++ {
          for j:=uint16(0); j<row; j++ {
-            enlarged_cols_and_rows[i*row + j] = 255
+            enlarged_cols_and_rows[i*row + j] = 0
          }
       }
       b1:=top*row
@@ -181,7 +180,7 @@ func transformCanvasData(cd *canvasData) []float32 {
       b2:=top*row + uint16(len(enlarged_cols))
       for i:=uint16(0); i<bottom; i++ {
          for j:=uint16(0); j<row; j++ {
-            enlarged_cols_and_rows[b2 + i*row + j] = 255
+            enlarged_cols_and_rows[b2 + i*row + j] = 0
          }
       }
    }
@@ -204,7 +203,7 @@ func transformCanvasData(cd *canvasData) []float32 {
             }
          }
          var avg float64 = float64(cell_sum)/float64(cell_size*cell_size)/255.0
-         retval[(i+uint16(edgeSize/2))*28 + j + uint16(edgeSize/2)] = 1.0 - float32(avg)
+         retval[(i+uint16(edgeSize/2))*28 + j + uint16(edgeSize/2)] = float32(avg)
       }
    }
    return retval
