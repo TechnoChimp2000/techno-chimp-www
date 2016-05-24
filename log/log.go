@@ -16,7 +16,7 @@ var (
 func Init( infoHandle, warningHandle, errorHandle io.Writer, filepath string) {
 
 	Info = log.New(infoHandle,
-		"INFO: \t\t",
+		"INFO: \t",
 		log.Ldate|log.Ltime|log.Lshortfile)
 
 	Warning = log.New(warningHandle,
@@ -24,7 +24,7 @@ func Init( infoHandle, warningHandle, errorHandle io.Writer, filepath string) {
 		log.Ldate|log.Ltime|log.Lshortfile)
 
 	Error = log.New(errorHandle,
-		"ERROR: \t\t",
+		"ERROR: \t",
 		log.Ldate|log.Ltime|log.Lshortfile)
 
 	// set output for these 3 io.writers to go to a file

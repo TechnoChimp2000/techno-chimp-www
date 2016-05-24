@@ -25,8 +25,8 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 		gitPull()
 		// STEP #2 - go install
 		goInstall()
-		// STEP #3 - cp source target
-		moveExe()
+		// STEP #3 - cp source target - not needed. will have the shell script for that.
+		//moveExe()
 		// STEP #4 - kill the existing server if still online
 		log.Info.Printf("Turning myself off ... ")
 		os.Exit(0)
