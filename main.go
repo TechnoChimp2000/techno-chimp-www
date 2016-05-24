@@ -23,7 +23,7 @@ func main() {
 		fmt.Println("initial working directory: ", wdBefore)
 
 		// change working directory if you want to
-		syscall.Chdir("/Users/ivalantic/work/go/src/github.com/techno-chimp-www")
+		//syscall.Chdir("/Users/ivalantic/work/go/src/github.com/techno-chimp-www")
 
 		wdAfter, _ := syscall.Getwd()
 		fmt.Println("working directory changed to ", wdAfter )
@@ -39,5 +39,6 @@ func main() {
 	http.HandleFunc("/githook/", gitHook.Handler)
 
 	http.ListenAndServe(":8000", log.ServerLog(http.DefaultServeMux))
+
 }
 

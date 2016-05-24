@@ -8,29 +8,25 @@ import (
 	"github.com/techno-chimp-www/log"
 )
 
-// The handler is called by the 3rd party, github speficifally
-// a push to the production branch will trigger the following:
-// 1) pull into the local production branch on the server
-// 2) compiling the server program from the local branch
-// 3) moving the server program to where it belongs to, and restarting the server
+// some notes on what happens.
+// 1 - when a push is made to the branch, github does a POST request to technochimp.com/githook/
+// 2 - that triggers a bunch of processes that eventually result in a new server going live
+// Processes are: git pull, go install and server die
+// Restarting of the server is managed by the crontab of www-data
 
 func Handler(res http.ResponseWriter, req *http.Request) { 
 	if req.URL.Path == "/githook/" {
 
 		log.Init(os.Stdout, os.Stdout, os.Stderr, "/var/www/sites/technochimp.com/logs/githook.log")
-
 		log.Info.Println("githook requested");
 
 		// STEP #1 - git pull
 		gitPull()
 		// STEP #2 - go install
 		goInstall()
-		// STEP #3 - cp source target - not needed. will have the shell script for that.
-		//moveExe()
-		// STEP #4 - kill the existing server if still online
-		log.Info.Printf("Turning myself off ... ")
+		log.Info.Printf("Turning myself off ... \n")
+		// TODO: this way of turning off a server is pretty ugly, but it works like a charm!
 		os.Exit(0)
-		// STEP #5 - restart the server ( this might be unnecessary because our cronjob will take care of it himself
 
 		return
 	}
@@ -73,15 +69,4 @@ func goInstall() {
 	logError(err)
 	logOutput(output)
 }
-
-// STEP #3 - move bin
-func moveExe() {
-	cmd := exec.Command("cp", "/home/www-data/go/bin/techno-chimp-www", "/var/www/sites/technochimp.com/techno-chimp-www")
-	logCommand(cmd)
-	output, err := cmd.CombinedOutput()
-	logError(err)
-	logOutput(output)
-}
-
-
 
