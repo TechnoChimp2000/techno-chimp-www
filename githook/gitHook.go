@@ -17,7 +17,7 @@ import (
 func Handler(res http.ResponseWriter, req *http.Request) { 
 	if req.URL.Path == "/githook/" {
 
-		log.Init(os.Stdout, os.Stdout, os.Stderr, "githook.log")
+		log.Init(os.Stdout, os.Stdout, os.Stderr, "/var/www/sites/technochimp.com/logs/githook.log")
 
 		log.Info.Println("githook requested");
 
@@ -31,7 +31,7 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 		log.Info.Printf("Turning myself off ... ")
 		os.Exit(0)
 		// STEP #5 - restart the server ( this might be unnecessary because our cronjob will take care of it himself
-		
+
 		return
 	}
 	return
