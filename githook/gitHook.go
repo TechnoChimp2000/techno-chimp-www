@@ -21,30 +21,35 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 
 		log.Info.Println("githook requested");
 
+		// STEP #1 - git pull
+		// STEP #2 - go install
+		// STEP #3 - kill the existing server
+		// STEP #4 - restart the server ( this might be unnecessary because our cronjob will take care of it himself
+
 		cmd := exec.Command("git", "-C", "/home/www-data/go/src/github.com/techno-chimp-www/", "pull")
 		// here we need to be specific where to pull from -- full path to destination is appropriate
 
-		printCommand(cmd)
+		logCommand(cmd)
 		output, err := cmd.CombinedOutput()
-		printError(err)
-		printOutput(output)
+		logError(err)
+		logOutput(output)
 		return
 	}
 	return
 } 
 
-func printCommand(cmd *exec.Cmd) {
+func logCommand(cmd *exec.Cmd) {
 
 	log.Info.Printf("Executing: %s\n", strings.Join(cmd.Args, " "))
 }
 
-func printOutput(outs []byte) {
+func logOutput(outs []byte) {
  	if len(outs) > 0 {
     		log.Info.Printf("Output: %s\n", string(outs))
   	}
 }
 
-func printError(err error) {
+func logError(err error) {
 	if err != nil {
     		log.Error.Printf("Error: %s\n", err.Error())
   	}
