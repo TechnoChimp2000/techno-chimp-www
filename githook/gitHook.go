@@ -28,10 +28,10 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 		// STEP #3 - cp source target
 		moveExe()
 		// STEP #4 - kill the existing server if still online
-
+		log.Info.Printf("Turning myself off ... ")
+		os.Exit(0)
 		// STEP #5 - restart the server ( this might be unnecessary because our cronjob will take care of it himself
-
-
+		
 		return
 	}
 	return
