@@ -25,8 +25,11 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 		gitPull()
 		// STEP #2 - go install
 		goInstall()
-		// STEP #3 - kill the existing server
-		// STEP #4 - restart the server ( this might be unnecessary because our cronjob will take care of it himself
+		// STEP #3 - cp source target
+		moveExe()
+		// STEP #4 - kill the existing server if still online
+
+		// STEP #5 - restart the server ( this might be unnecessary because our cronjob will take care of it himself
 
 
 		return
@@ -64,7 +67,16 @@ func gitPull() {
 
 // STEP #2 - go install
 func goInstall() {
-	cmd := exec.Command("go", "install", "/home/www-data/go/src/github.com/techno-chimp-www/main.go")
+	cmd := exec.Command("go", "install", "github.com/techno-chimp-www")
+	logCommand(cmd)
+	output, err := cmd.CombinedOutput()
+	logError(err)
+	logOutput(output)
+}
+
+// STEP #3 - move bin
+func moveExe() {
+	cmd := exec.Command("cp", "/home/www-data/go/bin/techno-chimp-www", "/var/www/sites/technochimp.com/techno-chimp-www")
 	logCommand(cmd)
 	output, err := cmd.CombinedOutput()
 	logError(err)
