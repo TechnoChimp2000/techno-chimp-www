@@ -24,79 +24,98 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
             canvasComponent = (function () {
                 function canvasComponent(http) {
                     this.canvasId = "canvasFeedforwardDemo";
-                    this.canvasWidth = 400;
-                    this.canvasHeight = 400;
-                    this.canvasStyle = 'border:1px solid #000000;';
-                    this.imageWidth = 28;
-                    this.imageHeight = 28;
-                    this.imageMinColor = 0;
-                    this.imageMaxColor = 255;
-                    this.imageDefaultColor = 255;
+                    this.secondCanvasId = "secondCanvas";
+                    this.canvasWidth = 300;
+                    this.canvasHeight = 300;
+                    this.canvasStyle = 'border:1px solid #000000; float: left;';
+                    this.secondCanvasStyle = 'border:1px solid #000000; float: left;';
                     this.mouseOver = false;
                     this.mouseDown = false;
-                    this.dx = this.canvasWidth / this.imageWidth;
-                    this.dy = this.canvasHeight / this.imageHeight;
+                    this.min_x = this.canvasWidth;
+                    this.max_x = 0;
+                    this.min_y = this.canvasHeight;
+                    this.max_y = 0;
                     this.showResult = false;
                     this.http = http;
-                    this.imageContent = [];
-                    for (var i = 0; i < this.imageHeight; ++i) {
-                        this.imageContent.push([]);
-                        for (var j = 0; j < this.imageWidth; ++j)
-                            this.imageContent[i].push(this.imageDefaultColor);
-                    }
                 }
                 canvasComponent.prototype.ngAfterViewInit = function () {
                     this.mCanvas = document.getElementById(this.canvasId);
                     this.mCanvasContext = this.mCanvas.getContext('2d');
-                    this.resetCanvas();
+                    this.mCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+                    this.mSecondCanvas = document.getElementById(this.secondCanvasId);
+                    this.mSecondCanvasContext = this.mSecondCanvas.getContext('2d');
+                    this.mSecondCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+                    var pic = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.20462185, 0.5, 0.5, 0.122709095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.4187675, 1, 1, 0.15318125, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.09539819, 0.7103641, 0.5766107, 0.0037415028, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.7244898, 0.78571427, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0.78571427, 0.7244898, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0.71428573, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.21482593, 0.78571427, 0.78571427, 0.2944578, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.2310524, 1, 1, 0.23217285, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00048017502, 0.37056822, 0.36998802, 0.00042015314, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    this.updateSecondCanvas(pic);
                 };
                 canvasComponent.prototype.updateMouseOverState = function (state) {
                     this.mouseOver = state;
                     this.mouseDown = this.mouseOver ? this.mouseDown : false;
+                    if (this.mouseOver)
+                        this.mCanvas.style.cursor = "pointer";
+                    else
+                        this.mCanvas.style.cursor = "auto";
                 };
-                canvasComponent.prototype.updateMouseDownState = function (state) {
+                canvasComponent.prototype.updateMouseDownState = function (event, state) {
                     this.mouseDown = state;
+                    this.updateImageContent(event);
                 };
                 canvasComponent.prototype.updateImageContent = function (event) {
                     if (!this.mouseDown)
                         return;
-                    var cur_x = event.clientX / this.canvasWidth;
-                    cur_x = cur_x > 1.0 ? this.imageWidth - 1 : Math.round(cur_x * this.imageWidth) - 1;
-                    var cur_y = event.clientY / this.canvasHeight;
-                    cur_y = cur_y > 1.0 ? this.imageHeight - 1 : Math.round(cur_y * this.imageHeight) - 1;
-                    this.redrawCanvas(false, cur_x, cur_y);
-                };
-                canvasComponent.prototype.resetCanvas = function () {
-                    this.showResult = false;
-                    this.redrawCanvas(true);
-                };
-                canvasComponent.prototype.redrawCanvas = function (reset, x_pos, y_pos) {
-                    if (!reset && this.imageContent[x_pos][y_pos] > 0) {
-                        var cur = this.imageContent[x_pos][y_pos];
-                        cur = cur > 50 ? cur - 50 : 0;
-                        this.imageContent[x_pos][y_pos] = cur;
+                    var posx = event.clientX;
+                    var posy = event.clientY;
+                    this.mCanvasContext.beginPath();
+                    for (var i = 0; i < 5; ++i) {
+                        var alpha = (5.0 - i) / 5.0;
+                        this.mCanvasContext.fillStyle = 'rgba(0, 0, 0, ' + alpha + ')';
+                        var radius = 6.0 / 100.0 * this.canvasWidth;
+                        var left = posx - radius;
+                        var right = posx + radius;
+                        var up = posy - radius;
+                        var down = posy + radius;
+                        if (left < this.min_x)
+                            this.min_x = left < 0 ? 0 : left;
+                        if (right > this.max_x)
+                            this.max_x = right > this.canvasWidth ? this.canvasWidth : right;
+                        if (up < this.min_y)
+                            this.min_y = up < 0 ? 0 : up;
+                        if (down > this.max_y)
+                            this.max_y = down > this.canvasHeight ? this.canvasHeight : down;
+                        this.mCanvasContext.arc(posx, posy, radius, 0, Math.PI * 2);
+                        this.mCanvasContext.fill();
                     }
-                    this.mCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-                    for (var i = 0; i < this.imageWidth; ++i) {
-                        for (var j = 0; j < this.imageHeight; ++j) {
-                            if (reset)
-                                this.imageContent[i][j] = this.imageDefaultColor;
-                            this.mCanvasContext.fillStyle = "rgb(" +
-                                this.imageContent[i][j] + ", " +
-                                this.imageContent[i][j] + ", " +
-                                this.imageContent[i][j] +
-                                ")";
-                            this.mCanvasContext.fillRect(i * this.dx, j * this.dy, this.dx, this.dy);
+                };
+                canvasComponent.prototype.updateSecondCanvas = function (pic28x28) {
+                    var dx = this.canvasWidth / 28.0;
+                    var dy = this.canvasHeight / 28.0;
+                    for (var i = 0; i < 28; i++) {
+                        for (var j = 0; j < 28; j++) {
+                            var color = 255 - Math.floor(pic28x28[28 * i + j] * 255.0);
+                            this.mSecondCanvasContext.fillStyle = 'rgb(' + color + ', ' + color + ', ' + color + ')';
+                            this.mSecondCanvasContext.fillRect(j * dx, i * dy, dx, dy);
                         }
                     }
                 };
+                canvasComponent.prototype.resetCanvas = function () {
+                    this.showResult = false;
+                    this.min_x = this.canvasWidth;
+                    this.max_x = 0;
+                    this.min_y = this.canvasHeight;
+                    this.max_y = 0;
+                    this.mCanvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+                };
                 canvasComponent.prototype.feedforward = function () {
                     var _this = this;
-                    var data = [];
-                    for (var i = 0; i < this.imageWidth; ++i)
-                        for (var j = 0; j < this.imageHeight; ++j)
-                            data.push(255 - this.imageContent[j][i]);
-                    this.http.post("/canvas-component/feedforward/", JSON.stringify(data))
+                    var width = this.max_x - this.min_x;
+                    var height = this.max_y - this.min_y;
+                    var canvas_data = this.mCanvasContext.getImageData(this.min_x, this.min_y, width, height);
+                    var json_data = JSON.stringify({
+                        'width': canvas_data.width,
+                        'height': canvas_data.height,
+                        'data': canvas_data.data
+                    });
+                    this.http.post("/canvas-component/feedforward/", json_data)
                         .map(function (res) {
                         _this.result = res.json();
                         _this.showResult = true;
